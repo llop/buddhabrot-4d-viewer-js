@@ -19,7 +19,7 @@ A working example can be found in [index.html](index.html).
 
 Include 'buddhabrot-viewer.js' and 'buddhabrot-viewer.css' in your HTML file. [jQuery](https://jquery.com/) is also required.
 
-```
+```html
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 <script src='buddhabrot-viewer.js'></script>
 <link rel='stylesheet' href='assets/buddhabrot-viewer.css'>
@@ -27,7 +27,7 @@ Include 'buddhabrot-viewer.js' and 'buddhabrot-viewer.css' in your HTML file. [j
 
 Add the viewer's HTML elements. The following code is taken directly from the example:
 
-```
+```html
 <div class='buddhabrot'>
   <canvas id='buddhabrot-canvas' class='buddhabrot-canvas' width='1000' height='600'>Your browser does not support canvas.</canvas>
 </div>
@@ -123,7 +123,7 @@ All elements are, of course, customizable via CSS.
 The initial image is the 'front' view of the (zr, zi, cr) object.
 Start the viewer with the following code:
 
-```
+```html
 <script>
   var buddhabrotControls;
 
@@ -184,7 +184,7 @@ You can provide a custom `options` object to the `Buddhabrot` constructor in ord
 
 The defaults look like this:
 
-```
+```javascript
 {
   squareIters = undefined,
   maxNRed = 5000,
@@ -251,7 +251,7 @@ An `options` object can also be passed on to the constructor for customization. 
 
 Default options are:
 
-```
+```javascript
 {
   minNColor = 1,
   maxNColor = 5000,
