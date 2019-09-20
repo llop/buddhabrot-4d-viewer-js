@@ -1,0 +1,241 @@
+.buddhabrot {
+  border-radius: 10px 10px 0px 0px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.buddhabrot-canvas {
+  border-radius: 10px;
+}
+
+.buddhabrot-controls {
+  background-color: #fff;
+  background-image: linear-gradient(#fff, #aaa);
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px 40px 20px 40px;
+}
+
+.controls-table {
+  width: 100%;
+  color: #223c65;
+  font-family: georgia, serif;
+}
+
+.controls-label {
+  text-align: center;
+  font-weight: bold;
+}
+
+.image-label {
+  padding-top: 10px;
+}
+
+.controls-cell {
+  width: 50%;
+  position: relative;
+  vertical-align: top;
+}
+
+.buttons-box {
+  padding-top: 10px;
+}
+
+.control-btn {
+  vertical-align: top;
+}
+
+.volume-slider-box {
+  text-align: center;
+  padding: 10px 0px 30px 0px;
+}
+
+.volume-slider {
+  width: 306px;
+}
+
+.volume-controls {
+  padding-left: 40px;
+}
+
+.volumes-box {
+  position: relative;
+  text-align: center;
+}
+
+.volAX {
+  position: absolute;
+  top: -10px;
+  left: 11px;
+  color: #9606b4;
+  font-weight: bold;
+}
+.volAY {
+  position: absolute;
+  top: 42px;
+  left: -35px;
+  color: #ff8d12;
+  font-weight: bold;
+}
+.volAZ {
+  position: absolute;
+  top: 50px;
+  left: 90px;
+  color: #b7a801;
+  font-weight: bold;
+}
+
+.volBX {
+  position: absolute;
+  top: -10px;
+  left: 299px;
+  color: #9606b4;
+  font-weight: bold;
+}
+.volBY {
+  position: absolute;
+  top: 42px;
+  left: 253px;
+  color: #ff8d12;
+  font-weight: bold;
+}
+.volBZ {
+  position: absolute;
+  top: 50px;
+  left: 378px;
+  color: #b7a801;
+  font-weight: bold;
+}
+
+.buddhabrot-select {
+  font-family: georgia, serif;
+  font-size: 17px;
+}
+
+.buddhabrot-button {
+  background-color: #fff;
+  border: 1px solid #223c65;
+  font-family: georgia, serif;
+  font-size: 17px;
+  color: #223c65;
+  padding: 10px 10px;
+  margin: 0px 3px;
+  text-align: center;
+  display: inline-block;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  border-radius: 5px;
+}
+
+.buddhabrot-button:hover {
+  background-color: #bee5f9;
+  color: #000;
+  text-shadow: 3px 3px 1px #d4d4d4;
+}
+
+.colors-box {
+  margin: 4px 0px;
+}
+
+.color-slider {
+  -webkit-appearance: none;
+  width: 360px;
+  height: 4px;
+  border: 1px solid #888;
+  border-radius: 20px;
+  background: #fff;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.color-slider:hover {
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.8);
+}
+
+.color-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; 
+  border: 1px solid #fff;
+  background: #999;
+  cursor: pointer;
+}
+
+.color-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: #999;
+  cursor: pointer;
+}
+
+.red-slider {
+  background: #f00;
+}
+.red-slider::-webkit-slider-thumb {
+  background: #f00;
+}
+.red-slider::-moz-range-thumb {
+  background: #f00;
+}
+
+.green-slider {
+  background: #0f0;
+}
+.green-slider::-webkit-slider-thumb {
+  background: #0f0;
+}
+.green-slider::-moz-range-thumb {
+  background: #0f0;
+}
+
+.blue-slider {
+  background: #00f;
+}
+.blue-slider::-webkit-slider-thumb {
+  background: #00f;
+}
+.blue-slider::-moz-range-thumb {
+  background: #00f;
+}
+
+.buddhabrot-input {
+  font-size: 17px;
+  font-family: georgia, serif;
+}
+
+.red-input {
+  color: #f00;
+}
+
+.green-input {
+  color: #35c135;
+}
+
+.blue-input {
+  color: #00f;
+}
+
+.density-box {
+  display: inline-block;
+  margin: 10px 20px 0px 20px;
+  text-align: right;
+}
+
+.density-select {
+  height: 32px;
+  border-radius: 5px;
+  color: #223c65;
+}
+
+.radio-box {
+  padding-bottom: 3px;
+}
+
+
+
+
+

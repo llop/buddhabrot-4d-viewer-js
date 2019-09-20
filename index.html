@@ -1,0 +1,134 @@
+<head>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src='buddhabrot-viewer.js'></script>
+  <link rel='stylesheet' href='assets/buddhabrot-viewer.css'>
+  <script>
+  var buddhabrotControls;
+
+  function renderLoop() {
+    buddhabrotControls.render();
+    requestAnimationFrame(renderLoop);
+  }
+
+  $(() => {
+    let canvas = $('#buddhabrot-canvas');
+    let buddhabrot = new Buddhabrot(canvas);
+    buddhabrotControls = new BuddhabrotControls(buddhabrot, {
+      redInput: $('#red-input'),
+      greenInput: $('#green-input'),
+      blueInput: $('#blue-input'),
+      redSlider: $('#red-slider'),
+      greenSlider: $('#green-slider'),
+      blueSlider: $('#blue-slider'),
+      volumeSlider: $('#volume-slider'),
+      volAXSelect: $('#volAX-select'),
+      volAYSelect: $('#volAY-select'),
+      volAZSelect: $('#volAZ-select'),
+      volBXSelect: $('#volBX-select'),
+      volBYSelect: $('#volBY-select'),
+      volBZSelect: $('#volBZ-select'),
+      densitySelect: $('#density-select'),
+      resetButton: $('#reset-btn'),
+      repaintButton: $('#repaint-btn'),
+      cancelButton: $('#cancel-btn')
+    });
+    buddhabrotControls.start();
+    renderLoop();
+  });
+  </script>
+</head>
+<body>
+  <div style='margin:0 auto; width:1000px;'>
+    
+    <div class='buddhabrot'>
+      <canvas id='buddhabrot-canvas' class='buddhabrot-canvas' width='1000' height='600'>Your browser does not support canvas.</canvas>
+    </div>
+    
+    <div class='buddhabrot-controls'>
+      <table class='controls-table'>
+      <tr>
+      <td><div class='controls-label'>Colors</div></td>
+      <td><div class='controls-label'>Volume</div></td>
+      </tr>
+      <tr>
+        <td class='controls-cell'>
+          <div class='colors-box'>
+            <input type='number' id='red-input' class='buddhabrot-input red-input' value='5000' min='1' max='5000'></input>
+            <input type='range' id='red-slider' class='color-slider red-slider' value='5000' min='1' max='5000'></input>
+          </div>
+          <div class='colors-box'>
+            <input type='number' id='green-input' class='buddhabrot-input green-input' value='500' min='1' max='5000'></input>
+            <input type='range' id='green-slider' class='color-slider green-slider' value='500' min='1' max='5000'></input>
+          </div>
+          <div class='colors-box'>
+            <input type='number' id='blue-input' class='buddhabrot-input blue-input' value='50' min='1' max='5000'></input>
+            <input type='range' id='blue-slider' class='color-slider blue-slider' value='50' min='1' max='5000'></input>
+          </div>
+          <div class='controls-label image-label'>Image</div>
+          <div class='buttons-box'>
+            <button id='reset-btn' class='buddhabrot-button control-btn'>Reset</button>
+            <div class='density-box'>
+              <label for='density-select'>Density: </label>
+              <select id='density-select' class='density-select buddhabrot-select'>
+                <option value='low'>Low</option>
+                <option value='standard' selected>Standard</option>
+                <option value='hi'>High</option>
+              </select>
+            </div>
+            <button id='repaint-btn' class='buddhabrot-button control-btn'>Repaint</button>
+            <button id='cancel-btn' class='buddhabrot-button control-btn'>Cancel</button>
+          </div>
+        </td>
+        <td class='controls-cell'>
+          <div class='volume-controls'>
+          <div class='volume-slider-box'>
+            <input type='range' id='volume-slider' class='color-slider volume-slider' value='0' min='0' max='1000'></input>
+          </div>
+          <div class='volumes-box'>
+            <img src='assets/buddhabrot-volumes.png' alt='Buddhabrot volumes'></img>
+            <select id='volAX-select' class='volAX buddhabrot-select'>
+              <option value='zr' selected>Zr</option>
+              <option value='zi'>Zi</option>
+              <option value='cr'>Cr</option>
+              <option value='ci'>Ci</option>
+            </select>
+            <select id='volAY-select' class='volAY buddhabrot-select'>
+              <option value='zr'>Zr</option>
+              <option value='zi' selected>Zi</option>
+              <option value='cr'>Cr</option>
+              <option value='ci'>Ci</option>
+            </select>
+            <select id='volAZ-select' class='volAZ buddhabrot-select'>
+              <option value='zr'>Zr</option>
+              <option value='zi'>Zi</option>
+              <option value='cr' selected>Cr</option>
+              <option value='ci'>Ci</option>
+            </select>
+            <select id='volBX-select' class='volBX buddhabrot-select'>
+              <option value='zr'>Zr</option>
+              <option value='zi'>Zi</option>
+              <option value='cr' selected>Cr</option>
+              <option value='ci'>Ci</option>
+            </select>
+            <select id='volBY-select' class='volBY buddhabrot-select'>
+              <option value='zr'>Zr</option>
+              <option value='zi'>Zi</option>
+              <option value='cr'>Cr</option>
+              <option value='ci' selected>Ci</option>
+            </select>
+            <select id='volBZ-select' class='volBZ buddhabrot-select'>
+              <option value='zr'>Zr</option>
+              <option value='zi' selected>Zi</option>
+              <option value='cr'>Cr</option>
+              <option value='ci'>Ci</option>
+            </select>
+          </div>
+          </div>
+        </td>
+      </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</body>
