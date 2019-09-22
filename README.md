@@ -125,38 +125,30 @@ Start the viewer with the following code:
 
 ```html
 <script>
-  var buddhabrotControls;
-
-  function renderLoop() {
-    buddhabrotControls.render();
-    requestAnimationFrame(renderLoop);
-  }
-
-  $(() => {
-    let canvas = $('#buddhabrot-canvas');
-    let buddhabrot = new Buddhabrot(canvas);
-    buddhabrotControls = new BuddhabrotControls(buddhabrot, {
-      redInput: $('#red-input'),
-      greenInput: $('#green-input'),
-      blueInput: $('#blue-input'),
-      redSlider: $('#red-slider'),
-      greenSlider: $('#green-slider'),
-      blueSlider: $('#blue-slider'),
-      volumeSlider: $('#volume-slider'),
-      volAXSelect: $('#volAX-select'),
-      volAYSelect: $('#volAY-select'),
-      volAZSelect: $('#volAZ-select'),
-      volBXSelect: $('#volBX-select'),
-      volBYSelect: $('#volBY-select'),
-      volBZSelect: $('#volBZ-select'),
-      densitySelect: $('#density-select'),
-      resetButton: $('#reset-btn'),
-      repaintButton: $('#repaint-btn'),
-      cancelButton: $('#cancel-btn')
-    });
-    buddhabrotControls.start();
-    renderLoop();
+$(() => {
+  const canvas = $('#buddhabrot-canvas');
+  const buddhabrot = new Buddhabrot(canvas);
+  const buddhabrotControls = new BuddhabrotControls(buddhabrot, {
+    redInput: $('#red-input'),
+    greenInput: $('#green-input'),
+    blueInput: $('#blue-input'),
+    redSlider: $('#red-slider'),
+    greenSlider: $('#green-slider'),
+    blueSlider: $('#blue-slider'),
+    volumeSlider: $('#volume-slider'),
+    volAXSelect: $('#volAX-select'),
+    volAYSelect: $('#volAY-select'),
+    volAZSelect: $('#volAZ-select'),
+    volBXSelect: $('#volBX-select'),
+    volBYSelect: $('#volBY-select'),
+    volBZSelect: $('#volBZ-select'),
+    densitySelect: $('#density-select'),
+    resetButton: $('#reset-btn'),
+    repaintButton: $('#repaint-btn'),
+    cancelButton: $('#cancel-btn')
   });
+  buddhabrotControls.start();
+});
 </script>
 ```
 

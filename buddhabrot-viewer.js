@@ -72,7 +72,7 @@ class Buddhabrot {
     this.maxNRed = maxNRed; 
     this.maxNGreen = maxNGreen; 
     this.maxNBlue = maxNBlue; 
-    this.histMaxN = histMaxN;
+    this.imgMapMaxN = histMaxN;
     
     this.minN = minN;
     
@@ -151,13 +151,13 @@ class Buddhabrot {
   
   // initialize color arrays
   _initDataStructures() {
-    this.hist = new Uint8Array(this.imgSize);
+    this.imgMap = new Uint8Array(this.imgSize);
     this.gray = new Uint32Array(this.imgSize);
     this.red = new Uint32Array(this.imgSize);
     this.green = new Uint32Array(this.imgSize);
     this.blue = new Uint32Array(this.imgSize);
     for (let i = 0; i < this.imgSize; ++i) {
-      this.hist[i] = 0;
+      this.imgMap[i] = 0;
       this.gray[i] = 0;
       this.red[i] = 0;
       this.green[i] = 0;
@@ -255,7 +255,7 @@ class Buddhabrot {
   
   // build functions
   // creates an array of ints of size this.imgWidth * this.imgHeight
-  // this.hist[x][y] = 1 if (x, yi) is sure to be outside M; 0 otherwise
+  // this.imgMap[x][y] = 1 if (x, yi) is sure to be outside M; 0 otherwise
   async initialize() {
     
     // set proper render vars
@@ -280,14 +280,14 @@ class Buddhabrot {
         let tr = 0.0;
         let ti = 0.0;
         let n = 0;
-        while (n < this.histMaxN && tr + ti <= 4.0) {
+        while (n < this.imgMapMaxN && tr + ti <= 4.0) {
           zi = 2.0 * zr * zi + ci;
           zr = tr - ti + cr;
           tr = zr * zr;
           ti = zi * zi;
           ++n;
         }
-        this.hist[x * this.imgWidth + y] = this.hist[x * this.imgWidth + (this.imgWidth - y - 1)] = n < this.histMaxN;
+        this.imgMap[x * this.imgWidth + y] = this.imgMap[x * this.imgWidth + (this.imgWidth - y - 1)] = n < this.imgMapMaxN;
       }
       
       // wait every so often
@@ -298,19 +298,19 @@ class Buddhabrot {
     }
     
     // thicken histogram
-    let histTmp = new Uint8Array(this.imgSize);
+    let imgMapTmp = new Uint8Array(this.imgSize);
     for (let x = 0; x < this.imgHeight; ++x) for (let y = 0; y < this.imgWidth; ++y) 
-      histTmp[x * this.imgWidth + y] = this._isHistPointGood(x, y);
+      imgMapTmp[x * this.imgWidth + y] = this._isMapPointGood(x, y);
     
-    this.hist = histTmp;
+    this.imgMap = imgMapTmp;
     this.initialized = true;
   }
   
-  // return true if this.hist[x][y] or any of its neighbors is true
-  _isHistPointGood(x, y) {
+  // return true if this.imgMap[x][y] or any of its neighbors is true
+  _isMapPointGood(x, y) {
     for (let a = Math.max(x - 1, 0); a < Math.min(x + 2, this.imgHeight); ++a)
       for (let b = Math.max(y - 1, 0); b < Math.min(y + 2, this.imgWidth); ++b)
-        if (this.hist[a * this.imgWidth + b]) return 1;
+        if (this.imgMap[a * this.imgWidth + b]) return 1;
     return 0;
   }
   
@@ -333,9 +333,9 @@ class Buddhabrot {
     let inc = this.width / (this.imgWidth * this.squareIters);
     let ratioTmp = this.imgWidth / this.width;
     
-    let iteratesR = new Float64Array(this.histMaxN);
-    let iteratesI = new Float64Array(this.histMaxN);
-    for (let i = 0; i < this.histMaxN; ++i) {
+    let iteratesR = new Float64Array(this.imgMapMaxN);
+    let iteratesI = new Float64Array(this.imgMapMaxN);
+    for (let i = 0; i < this.imgMapMaxN; ++i) {
       iteratesR[i] = 0.0;
       iteratesI[i] = 0.0;
     }
@@ -343,11 +343,12 @@ class Buddhabrot {
     this._resetDataStructures();
     this._buildRotationMatrix();
     
+    //let t0 = Date.now();
     let maxN = Math.max(Math.max(this.maxNRed, this.maxNGreen), this.maxNBlue);
     let t = Date.now();
     for (let a = 0; this.scanLoop && a < this.imgHeight; ++a) {
       for (let b = 0; b < this.imgWidth; ++b) {
-        if (this.hist[a * this.imgWidth + b]) {
+        if (this.imgMap[a * this.imgWidth + b]) {
           let cr = crIni + a * this.width / this.imgWidth;
           let ciIniRow = ciIni + b * this.width / this.imgWidth;
           for (let i = 0; i < this.squareIters; ++i, cr += inc) {
@@ -394,6 +395,7 @@ class Buddhabrot {
       }     
     }
     
+    //console.log(Date.now() - t0);
     this.progress = -1;
     this.donePainting = true;
     return this.scanLoop;
@@ -412,7 +414,7 @@ class Buddhabrot {
   _renderHistogram() {
     let offset = 0;
     for (let i = 0; i < this.imgSize; ++i) {
-      let color = this.hist[i] ? 255 : 0;
+      let color = this.imgMap[i] ? 255 : 0;
       this.image.data[offset++] = color;
       this.image.data[offset++] = color;
       this.image.data[offset++] = color;
@@ -454,8 +456,7 @@ class Buddhabrot {
   
   
   scan(callback) {
-    this.scanPromise = this._scan();
-    this.scanPromise.then(callback);
+    this.scanPromise = this._scan().then(callback);
   }
   
   // main render function
@@ -466,14 +467,13 @@ class Buddhabrot {
     }
     this.context.clearRect(0, 0, this.imgWidth, this.imgHeight);
     this.context.putImageData(this.image, 0, 0);
-    //if (this.progress >= 0) this.renderProgress();
-    //if (this.showAxes) this.renderAxes();
   }
   
   
-  // https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
   // sleep function. use 'await this.sleep()' in async functions
-  _sleep() { return new Promise(resolve => setTimeout(resolve, 0)); }
+  _sleep() { 
+    return new Promise(resolve => requestAnimationFrame(resolve)); 
+  }
   
 }
 
@@ -914,10 +914,16 @@ class BuddhabrotControls {
     this.canvas.css('cursor', 'wait');
     await this.buddhabrot.initialize();
     this._scan();
+    this._renderLoop();
+  }
+  
+  _renderLoop() {
+    this._render();
+    requestAnimationFrame(() => { this._renderLoop(); });
   }
   
   // draw everything
-  render() {
+  _render() {
     this.buddhabrot.render();
     if (this.buddhabrot.progress >= 0) this._renderProgress();
     if (this.showAxes) this._renderAxes();

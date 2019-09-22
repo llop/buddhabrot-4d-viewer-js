@@ -3,17 +3,10 @@
   <script src='buddhabrot-viewer.js'></script>
   <link rel='stylesheet' href='assets/buddhabrot-viewer.css'>
   <script>
-  var buddhabrotControls;
-
-  function renderLoop() {
-    buddhabrotControls.render();
-    requestAnimationFrame(renderLoop);
-  }
-
   $(() => {
-    let canvas = $('#buddhabrot-canvas');
-    let buddhabrot = new Buddhabrot(canvas);
-    buddhabrotControls = new BuddhabrotControls(buddhabrot, {
+    const canvas = $('#buddhabrot-canvas');
+    const buddhabrot = new Buddhabrot(canvas);
+    const buddhabrotControls = new BuddhabrotControls(buddhabrot, {
       redInput: $('#red-input'),
       greenInput: $('#green-input'),
       blueInput: $('#blue-input'),
@@ -33,7 +26,6 @@
       cancelButton: $('#cancel-btn')
     });
     buddhabrotControls.start();
-    renderLoop();
   });
   </script>
 </head>
