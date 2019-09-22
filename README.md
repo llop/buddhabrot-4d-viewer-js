@@ -158,9 +158,9 @@ It is recommended to learn about the Mandelbrot and the Buddhabrot rendering tec
 
 ### Buddhabrot class
 
-The `Buddhabrot` class is in charge of scanning and rendering the fractal
+The `Buddhabrot` class is in charge of scanning and rendering the fractal. Its constructor takes the HTML canvas (required).
 
-You can provide a custom `options` object to the `Buddhabrot` constructor in order to set the render parameters:
+You can also provide a custom `options` object to the `Buddhabrot` constructor in order to set the render parameters:
 
 * `squareIters`: How many points<sup>2</sup> to sample within the area of a pixel.
 * `maxNRed`, `maxNGreen`, `maxNBlue`: For each color channel, set the maximum number of iterations for a point before it is considered to be in M. 
@@ -230,7 +230,7 @@ Finally, there is a getter function `painting` to find out if a scan is in progr
 
 ### BuddhabrotControls class
 
-The `BuddhabrotControls` class connects the UI to the `Buddhabrot` engine by using the aforementioned methods.
+The `BuddhabrotControls` class connects the UI to the `Buddhabrot` engine by using the aforementioned methods. Its constructor  takes a `Buddhabrot` instance.
 
 An `options` object can also be passed on to the constructor for customization. Besides the HTML elements, the following parameters are also available:
 
@@ -258,6 +258,21 @@ Default options are:
       '#fff000' 
     ]
 }
+```
+
+The `start()` function must be called to start up the viewer.
+
+Events are dispatched whenever a scan starts or ends. It is best to add handlers before calling the `start()` function:
+
+
+```javascript
+buddhabrotControls.on('scan-start', (event) => {
+  console.log('scan-start', event);
+});
+buddhabrotControls.on('scan-end', (event) => {
+  console.log('scan-end', event);
+});
+buddhabrotControls.start();
 ```
 
 ## License
