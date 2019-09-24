@@ -343,7 +343,7 @@ class Buddhabrot {
     this._resetDataStructures();
     this._buildRotationMatrix();
     
-    //let t0 = Date.now();
+    let t0 = Date.now();
     let maxN = Math.max(Math.max(this.maxNRed, this.maxNGreen), this.maxNBlue);
     let t = Date.now();
     for (let a = 0; this.scanLoop && a < this.imgHeight; ++a) {
@@ -395,7 +395,7 @@ class Buddhabrot {
       }     
     }
     
-    //console.log(Date.now() - t0);
+    console.log(Date.now() - t0);
     this.progress = -1;
     this.donePainting = true;
     return this.scanLoop;

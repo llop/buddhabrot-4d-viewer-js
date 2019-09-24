@@ -1,7 +1,7 @@
-buddhabrot-viewer-js
-====================
+buddhabrot-4d-viewer-js
+=======================
 
-Explore the 4 dimensions of the [Buddhabrot](https://en.wikipedia.org/wiki/Buddhabrot) using this HTML5 + Javascript viewer.
+Explore the 4 dimensions of the [Buddhabrot](https://en.wikipedia.org/wiki/Buddhabrot) using this HTML + Javascript viewer.
 
 
 ## Features
@@ -17,12 +17,12 @@ Explore the 4 dimensions of the [Buddhabrot](https://en.wikipedia.org/wiki/Buddh
 
 A working example can be found in [index.html](index.html).
 
-Include 'buddhabrot-viewer.js' and 'buddhabrot-viewer.css' in your HTML file. [jQuery](https://jquery.com/) is also required.
+Include 'buddhabrot-4d-viewer.js' and 'buddhabrot-4d-viewer.css' in your HTML file. [jQuery](https://jquery.com/) is also required.
 
 ```html
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-<script src='buddhabrot-viewer.js'></script>
-<link rel='stylesheet' href='assets/buddhabrot-viewer.css'>
+<script src='buddhabrot-4d-viewer.js'></script>
+<link rel='stylesheet' href='assets/buddhabrot-4d-viewer.css'>
 ``` 
 
 Add the viewer's HTML elements. The following code is taken directly from the example:
@@ -277,4 +277,4 @@ buddhabrotControls.start();
 
 ## License
 
-`buddhabrot-viewer-js` is resealsed under the MIT License. See [LICENSE](LICENSE) for details.
+`buddhabrot-4d-viewer-js` is resealsed under the MIT License. See [LICENSE](LICENSE) for details.
