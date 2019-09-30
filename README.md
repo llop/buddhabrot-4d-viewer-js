@@ -3,6 +3,8 @@ buddhabrot-4d-viewer-js
 
 Explore the 4 dimensions of the [Buddhabrot](https://en.wikipedia.org/wiki/Buddhabrot) using this HTML + Javascript viewer.
 
+Check out the [live demo](http://www.albertlobo.com/fractals/buddhabrot-4d-viewer)!
+
 
 ## Features
 
@@ -73,7 +75,7 @@ Add the viewer's HTML elements. The following code is taken directly from the ex
         <input type='range' id='volume-slider' class='color-slider volume-slider' value='0' min='0' max='1000'></input>
       </div>
       <div class='volumes-box'>
-        <img src='assets/buddhabrot-volumes.png' alt='Buddhabrot volumes'></img>
+        <img src='assets/buddhabrot-volumes.png' alt='Buddhabrot volumes' width='400' height='112'></img>
         <select id='volAX-select' class='volAX buddhabrot-select'>
           <option value='zr' selected>Zr</option>
           <option value='zi'>Zi</option>
