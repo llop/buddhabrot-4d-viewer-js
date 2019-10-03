@@ -152,7 +152,7 @@
 .color-slider {
   -webkit-appearance: none;
   width: 360px;
-  height: 2px;
+  height: 4px;
   border: 1px solid #888;
   border-radius: 20px;
   background: #fff;
