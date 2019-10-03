@@ -64,7 +64,7 @@ class Buddhabrot {
     let initialSide = 4.0;
     this.squareIters = squareIters;
     if (!this.squareIters) {
-      let minDim = Math.min(this.canvas.width(), this.canvas.height());
+      let minDim = Math.min(this.canvas.width, this.canvas.height);
       this.squareIters = minDim / (initialSide * 10);
     }
     
@@ -103,26 +103,23 @@ class Buddhabrot {
     this.repaint = false;           // true if there is a need to repaint the canvas
     this.donePainting = false;      // true if all image data has been gathered
     this.progress = -1;             // 0-1, how much of the plane has been scanned to render the buddhabrot
-    this.awaitingPromise = false;   // true if repaint was called, but the process has not yet started
     this.scanLoop = false;          // false when the render needs to get canceled
     
-    
     this.scanning = false;
-    this.scanLoop = false;
     this.scanDone = true;
     
     // get graphics context from canvas
     // then get image data (pixel array) to paint on
-    this.context = this.canvas[0].getContext('2d');
+    this.context = this.canvas.getContext('2d');
     this.context.lineJoin = 'round';
     this.context.lineWidth = 3;
     this.context.font = '18px Georgia';
     this.context.fillStyle = '#fff';
-    this.image = this.context.createImageData(this.canvas.width(), this.canvas.height());
+    this.image = this.context.createImageData(this.canvas.width, this.canvas.height);
     
     // get image dimensions from canvas
-    this.imgWidth = this.canvas.width();
-    this.imgHeight = this.canvas.height();
+    this.imgWidth = this.canvas.width;
+    this.imgHeight = this.canvas.height;
     this.imgSize = this.imgWidth * this.imgHeight;
     
     // center coords
@@ -343,7 +340,7 @@ class Buddhabrot {
     this._resetDataStructures();
     this._buildRotationMatrix();
     
-    let t0 = Date.now();
+    //let t0 = Date.now();
     let maxN = Math.max(Math.max(this.maxNRed, this.maxNGreen), this.maxNBlue);
     let t = Date.now();
     for (let a = 0; this.scanLoop && a < this.imgHeight; ++a) {
@@ -395,7 +392,7 @@ class Buddhabrot {
       }     
     }
     
-    console.log(Date.now() - t0);
+    //console.log(Date.now() - t0);
     this.progress = -1;
     this.donePainting = true;
     return this.scanLoop;
@@ -486,25 +483,30 @@ class BuddhabrotControls {
   static SCAN_START = 'scan-start';
   static SCAN_END = 'scan-end';
   
+  static CREATE_ELEMENT(htmlString) {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
+    return div.firstChild; 
+  }
   
   constructor(buddhabrot, {
-        redInput = $("<input type='number'></input>"),
-        greenInput = $("<input type='number'></input>"),
-        blueInput = $("<input type='number'></input>"),
-        redSlider = $("<input type='range'></input>"),
-        greenSlider = $("<input type='range'></input>"),
-        blueSlider = $("<input type='range'></input>"),
-        volumeSlider = $("<input type='range'></input>"),
-        volAXSelect = $("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
-        volAYSelect = $("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
-        volAZSelect = $("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
-        volBXSelect = $("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
-        volBYSelect = $("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
-        volBZSelect = $("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
-        densitySelect = $("<select><option value='low'>Low</option><option value='standard'>Standard</option><option value='hi'>High</option></select>"),
-        resetButton = $("<button type='button'>Reset</button>"),
-        repaintButton = $("<button type='button'>Repaint</button>"),
-        cancelButton = $("<button type='button'>Cancel</button>"),
+        redInput = BuddhabrotControls.CREATE_ELEMENT("<input type='number'></input>"),
+        greenInput = BuddhabrotControls.CREATE_ELEMENT("<input type='number'></input>"),
+        blueInput = BuddhabrotControls.CREATE_ELEMENT("<input type='number'></input>"),
+        redSlider = BuddhabrotControls.CREATE_ELEMENT("<input type='range'></input>"),
+        greenSlider = BuddhabrotControls.CREATE_ELEMENT("<input type='range'></input>"),
+        blueSlider = BuddhabrotControls.CREATE_ELEMENT("<input type='range'></input>"),
+        volumeSlider = BuddhabrotControls.CREATE_ELEMENT("<input type='range'></input>"),
+        volAXSelect = BuddhabrotControls.CREATE_ELEMENT("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
+        volAYSelect = BuddhabrotControls.CREATE_ELEMENT("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
+        volAZSelect = BuddhabrotControls.CREATE_ELEMENT("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
+        volBXSelect = BuddhabrotControls.CREATE_ELEMENT("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
+        volBYSelect = BuddhabrotControls.CREATE_ELEMENT("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
+        volBZSelect = BuddhabrotControls.CREATE_ELEMENT("<select><option value='zr'>Zr</option><option value='zi'>Zi</option><option value='cr'>Cr</option><option value='ci'>Ci</option></select>"),
+        densitySelect = BuddhabrotControls.CREATE_ELEMENT("<select><option value='low'>Low</option><option value='standard'>Standard</option><option value='hi'>High</option></select>"),
+        resetButton = BuddhabrotControls.CREATE_ELEMENT("<button type='button'>Reset</button>"),
+        repaintButton = BuddhabrotControls.CREATE_ELEMENT("<button type='button'>Repaint</button>"),
+        cancelButton = BuddhabrotControls.CREATE_ELEMENT("<button type='button'>Cancel</button>"),
         
         minNColor = 1,
         maxNColor = 5000,
@@ -522,8 +524,10 @@ class BuddhabrotControls {
     
     this.buddhabrot = buddhabrot;
     this.canvas = this.buddhabrot.canvas;
-    this.canvas.css('cursor', 'pointer');
+    this.canvas.style.cursor = 'pointer';
     this.context = this.buddhabrot.context;
+    
+    this.halfMaxDim = Math.max(this.canvas.width, this.canvas.height) / 2;
     
     // HTML elements
     this.redInput = redInput;
@@ -560,9 +564,6 @@ class BuddhabrotControls {
     this.axesWidth = axesWidth;
     
     this.showAxes = false;
-    this.mouseDown = false;
-    this.mouseXIni = 0;
-    this.mouseYIni = 0;
     this.rotationRepaint = false;
     
     // get defaults from buddhabrot
@@ -584,6 +585,12 @@ class BuddhabrotControls {
     this.handlers.set(BuddhabrotControls.SCAN_START, []);
     this.handlers.set(BuddhabrotControls.SCAN_END, []);
     
+    // pointer event
+    this.pointerDown = false;
+    this.pointerId = undefined;
+    this.xIni = 0;
+    this.yIni = 0;
+    
     // init UI
     this._initUI();
     this._addUIEventHandlers();
@@ -593,158 +600,184 @@ class BuddhabrotControls {
   
   // set limits to inputs
   _initUI() {
-    this.redInput.attr({
-        min: this.minNColor,
-        max: this.maxNColor
-      });
-    this.greenInput.attr({
-        min: this.minNColor,
-        max: this.maxNColor
-      });
-    this.blueInput.attr({
-        min: this.minNColor,
-        max: this.maxNColor
-      });
-    this.redSlider.attr({
-        min: this.minNColor,
-        max: this.maxNColor
-      });
-    this.greenSlider.attr({
-        min: this.minNColor,
-        max: this.maxNColor
-      });
-    this.blueSlider.attr({
-        min: this.minNColor,
-        max: this.maxNColor
-      });
-    this.volumeSlider.attr({
-        min: 0,
-        max: this.volumeSliderMax
-      });
+    this.redInput.min = this.minNColor;
+    this.redInput.max = this.maxNColor;
+    this.greenInput.min = this.minNColor;
+    this.greenInput.max = this.maxNColor;
+    this.blueInput.min = this.minNColor;
+    this.blueInput.max = this.maxNColor;
+    
+    this.redSlider.min = this.minNColor;
+    this.redSlider.max = this.maxNColor;
+    this.greenSlider.min = this.minNColor;
+    this.greenSlider.max = this.maxNColor;
+    this.blueSlider.min = this.minNColor;
+    this.blueSlider.max = this.maxNColor;
+    
+    this.volumeSlider.min = 0;
+    this.volumeSlider.max = this.volumeSliderMax;
+  }
+  
+  // is numeric
+  _isNumeric(n) { 
+    return !isNaN(parseFloat(n)) && isFinite(n); 
   }
   
   // UI events
   _addUIEventHandlers() {
     // color input listeners
-    this.redInput.bind('input keyup mouseup', () => {
-      let val = this.redInput.val();
-      if ($.isNumeric(val)) {
-        val = Number(val) | 0;
-        if (val < this.minNColor || val > this.maxNColor) val = this.params.maxNRed;
-      } else {
-        val = this.params.maxNRed;
-      }
-      this.params.maxNRed = val;
-      this.redInput.val(val);
-      this.redSlider.val(val);
-    });
-    this.greenInput.bind('input keyup mouseup', () => {
-      let val = this.greenInput.val();
-      if ($.isNumeric(val)) {
-        val = Number(val) | 0;
-        if (val < this.minNColor || val > this.maxNColor) val = this.params.maxNGreen;
-      } else {
-        val = this.params.maxNGreen;
-      }
-      this.params.maxNGreen = val;
-      this.greenInput.val(val);
-      this.greenSlider.val(val);
-    });
-    this.blueInput.bind('input keyup mouseup', () => {
-      let val = this.blueInput.val();
-      if ($.isNumeric(val)) {
-        val = Number(val) | 0;
-        if (val < this.minNColor || val > this.maxNColor) val = this.params.maxNBlue;
-      } else {
-        val = this.params.maxNBlue;
-      }
-      this.params.maxNBlue = val;
-      this.blueInput.val(val);
-      this.blueSlider.val(val);
-    });
+    this.redInput.addEventListener('input', this._redNumberInputHandler);
+    this.greenInput.addEventListener('input', this._greenNumberInputHandler);
+    this.blueInput.addEventListener('input', this._blueNumberInputHandler);
     
     // slider listeners
-    this.redSlider.on('input change', () => { 
-      this.params.maxNRed = this.redSlider.val();
-      this.redInput.val(this.params.maxNRed);
-    });
-    this.greenSlider.on('input change', () => { 
-      this.params.maxNGreen = this.greenSlider.val();
-      this.greenInput.val(this.params.maxNGreen);
-    });
-    this.blueSlider.on('input change', () => { 
-      this.params.maxNBlue = this.blueSlider.val();
-      this.blueInput.val(this.params.maxNBlue);
-    });
+    this.redSlider.addEventListener('input', this._redSliderInputHandler);
+    this.greenSlider.addEventListener('input', this._greenSliderInputHandler);
+    this.blueSlider.addEventListener('input', this._blueSliderInputHandler);
     
-    this.repaintButton.click(() => { this._repaint() });
-    this.resetButton.click(() => { this._reset() });
-    this.cancelButton.click(() => { this._cancel() });
+    this.repaintButton.addEventListener('click', event => { this._repaint() });
+    this.resetButton.addEventListener('click', event => { this._reset() });
+    this.cancelButton.addEventListener('click', event => { this._cancel() });
     
-    // add mouse event handlers
-    this.canvas.mousedown((event) => { this._mouseDownHandler(event) });
-    $(document).mousemove((event) => { this._mouseMoveHandler(event) });
-    $(document).mouseup((event) => { this._mouseUpHandler(event) });
+    // responsive stuff
+    this.canvas.style.touchAction = 'none';
+    this.canvas.addEventListener('pointerdown', this._handlePointerDown, true);
   }
   
   
-  // mouse event handlers
-  _mouseDownHandler(event) {
-    if (this.buddhabrot.painting) return;
+  _redNumberInputHandler = event => {
+    let value = parseFloat(this.redInput.value) | 0;
+    value = Math.max(this.minNColor, Math.min(this.maxNColor, value));
+    this.params.maxNRed = value;
+    this.redInput.value = value;
+    this.redSlider.value = value;
+  }
+  _greenNumberInputHandler = event => {
+    let value = parseFloat(this.greenInput.value) | 0;
+    value = Math.max(this.minNColor, Math.min(this.maxNColor, value));
+    this.params.maxNGreen = value;
+    this.greenInput.value = value;
+    this.greenSlider.value = value;
+  }
+  _blueNumberInputHandler = event => {
+    let value = parseFloat(this.blueInput.value) | 0;
+    value = Math.max(this.minNColor, Math.min(this.maxNColor, value));
+    this.params.maxNBlue = value;
+    this.blueInput.value = value;
+    this.blueSlider.value = value;
+  }
+  
+  _redSliderInputHandler = event => {
+    this.params.maxNRed = parseFloat(this.redSlider.value) | 0;
+    this.redInput.value = this.params.maxNRed;
+  }
+  _greenSliderInputHandler = event => {
+    this.params.maxNGreen = parseFloat(this.greenSlider.value) | 0;
+    this.greenInput.value = this.params.maxNGreen;
+  }
+  _blueSliderInputHandler = event => {
+    this.params.maxNBlue = parseFloat(this.blueSlider.value) | 0;
+    this.blueInput.value = this.params.maxNBlue;
+  }
+  
+  /*
+   * pointer event handlers
+   */
+  _handlePointerDown = event => {
+    event.preventDefault();
     
-    if (event.which == 1) {
+    // ignore if still painting, or another gesture already started
+    if (this.buddhabrot.painting || this.pointerDown) return;
+    this.pointerDown = true;
+    this.pointerId = event.pointerId;
+    
+    // add pointer event listeners
+    event.target.setPointerCapture(event.pointerId);
+    document.addEventListener('pointermove', this._handlePointerMove, true);
+    document.addEventListener('pointerup', this._handlePointerUp, true);
+    document.addEventListener('pointercancel', this._handlePointerCancel, true);
+    
+    // do work
+    const rect = this.canvas.getBoundingClientRect();
+    this.xIni = event.clientX - rect.left;
+    this.yIni = event.clientY - rect.top;
+    this.rotationRepaint = false;
+    this.showAxes = true;
+  }
+  
+  _handlePointerMove = event => {
+    event.preventDefault();
+    if (!this.pointerDown || this.pointerId != event.pointerId) return;
+    
+    // move axes
+    const rect = this.canvas.getBoundingClientRect();
+    this._move(event.clientX - rect.left, event.clientY - rect.top);
+  }
+  
+  _handlePointerUp = event => {
+    event.preventDefault();
+    if (!this.pointerDown || this.pointerId != event.pointerId) return;
+    
+    this._removePointerEventListeners(event);
+    this.pointerDown = false;
+    this.pointerId = undefined;
+    this.showAxes = false;
+    if (this.rotationRepaint) {
       this.rotationRepaint = false;
-      this.showAxes = true;
-      this.mouseDown = true;
-      this.mouseXIni = event.pageX - this.canvas.position().left;
-      this.mouseYIni = event.pageY - this.canvas.position().top;
+      this._repaint();
     }
   }
   
-  _mouseMoveHandler(event) {
-    if (this.mouseDown) {
-      let mouseX = event.pageX - this.canvas.position().left;
-      let mouseY = event.pageY - this.canvas.position().top;
-      
-      let offsetX = (mouseX - this.mouseXIni) * Math.PI / 500;
-      let offsetY = (mouseY - this.mouseYIni) * Math.PI / 500;
-      
-      let newLat = this.params.latitude + offsetX;
-      while (newLat > 2.0 * Math.PI) newLat -= 2.0 * Math.PI;
-      while (newLat < 0.0) newLat += 2.0 * Math.PI;
-      
-      let newLon = this.params.longitude + offsetY;
-      while (newLon > 2.0 * Math.PI) newLon -= 2.0 * Math.PI;
-      while (newLon < 0.0) newLon += 2.0 * Math.PI;
-      
-      this.params.latitude = newLat;
-      this.params.longitude = newLon;
-      this._buildRotationMatrix();
-      this.rotationRepaint = true;
-      
-      this.mouseXIni = mouseX;
-      this.mouseYIni = mouseY;
-    }
+  _handlePointerCancel = event => {
+    event.preventDefault();
+    if (!this.pointerDown || this.pointerId != event.pointerId) return;
+    
+    this._removePointerEventListeners(event);
+    this.pointerDown = false;
+    this.pointerId = undefined;
+    this.showAxes = false;
+    this.rotationRepaint = false;
+    this.params.latitude = this.buddhabrot.latitude;
+    this.params.longitude = this.buddhabrot.longitude;
   }
   
-  _mouseUpHandler(event) {
-    if (this.mouseDown) {
-      this.mouseDown = false;
-      this.showAxes = false;
-      if (this.rotationRepaint) {
-        this.rotationRepaint = false;
-        this._repaint();
-      }
-    }
+  _removePointerEventListeners(event) {
+    event.target.releasePointerCapture(event.pointerId);
+    document.removeEventListener('pointermove', this._handlePointerMove, true);
+    document.removeEventListener('pointerup', this._handlePointerUp, true);
+    document.removeEventListener('pointercancel', this._handlePointerCancel, true);
   }
+  
+  
+  _move(x, y) {
+    const offsetX = (x - this.xIni) * Math.PI / this.halfMaxDim;
+    const offsetY = (y - this.yIni) * Math.PI / this.halfMaxDim;
+    
+    let newLat = this.params.latitude - offsetX;
+    while (newLat > 2.0 * Math.PI) newLat -= 2.0 * Math.PI;
+    while (newLat < 0.0) newLat += 2.0 * Math.PI;
+    
+    let newLon = this.params.longitude + offsetY;
+    while (newLon > 2.0 * Math.PI) newLon -= 2.0 * Math.PI;
+    while (newLon < 0.0) newLon += 2.0 * Math.PI;
+    
+    this.params.latitude = newLat;
+    this.params.longitude = newLon;
+    this._buildRotationMatrix();
+    this.rotationRepaint = true;
+    
+    this.xIni = x;
+    this.yIni = y;
+  }
+  
   
   // rotation matrix for the axes
   _buildRotationMatrix() {
-    let cosb = Math.cos(this.params.longitude);
-    let sinb = Math.sin(this.params.longitude);
+    const cosb = Math.cos(this.params.longitude);
+    const sinb = Math.sin(this.params.longitude);
 
-    let cosc = Math.cos(this.params.latitude);
-    let sinc = Math.sin(this.params.latitude);
+    const cosc = Math.cos(this.params.latitude);
+    const sinc = Math.sin(this.params.latitude);
     
     this.Axx = cosb;
     this.Axy = sinb * sinc;
@@ -761,26 +794,26 @@ class BuddhabrotControls {
   
   // get parameters from UI and put them in this.params 
   _getUIOptions() {
-    this.params.squareIters = this.densities[this.densitySelect.val()];
-    let newAngRot = Math.sin((Math.PI * this.volumeSlider.val()) / (2.0 * this.volumeSliderMax));
+    this.params.squareIters = this.densities[this.densitySelect.value];
+    const newAngRot = Math.sin((Math.PI * parseFloat(this.volumeSlider.value)) / (2.0 * this.volumeSliderMax));
     this.params.angRot = [ newAngRot, newAngRot, newAngRot ];
     this.params.volA = [
-        this.volAXSelect.children('option:selected').val(),
-        this.volAYSelect.children('option:selected').val(),
-        this.volAZSelect.children('option:selected').val()
+        this.volAXSelect.value,
+        this.volAYSelect.value,
+        this.volAZSelect.value
       ];
     this.params.volB = [
-        this.volBXSelect.children('option:selected').val(),
-        this.volBYSelect.children('option:selected').val(),
-        this.volBZSelect.children('option:selected').val()
+        this.volBXSelect.value,
+        this.volBYSelect.value,
+        this.volBZSelect.value
       ];
   }
   
   // set UI parameters from options object
   _setUIOptions(options) {
-    if (options.squareIters == this.densities.low) this.densitySelect.val('low');
-    else if (options.squareIters == this.densities.hi) this.densitySelect.val('hi');
-    else this.densitySelect.val('standard');
+    if (options.squareIters == this.densities.low) this.densitySelect.value = 'low';
+    else if (options.squareIters == this.densities.hi) this.densitySelect.value = 'hi';
+    else this.densitySelect.value = 'standard';
     
     this.params.latitude = options.latitude;
     this.params.longitude = options.longitude;
@@ -790,22 +823,22 @@ class BuddhabrotControls {
     this.params.maxNGreen = options.maxNGreen;
     this.params.maxNBlue = options.maxNBlue;
     
-    this.redInput.val(this.params.maxNRed);
-    this.greenInput.val(this.params.maxNGreen);
-    this.blueInput.val(this.params.maxNBlue);
+    this.redInput.value = this.params.maxNRed;
+    this.greenInput.value = this.params.maxNGreen;
+    this.blueInput.value = this.params.maxNBlue;
     
-    this.redSlider.val(this.params.maxNRed);
-    this.greenSlider.val(this.params.maxNGreen);
-    this.blueSlider.val(this.params.maxNBlue);
+    this.redSlider.value = this.params.maxNRed;
+    this.greenSlider.value = this.params.maxNGreen;
+    this.blueSlider.value = this.params.maxNBlue;
     
-    this.volumeSlider.val(Math.asin(options.angRot[0]) * this.volumeSliderMax);
+    this.volumeSlider.value = Math.asin(options.angRot[0]) * this.volumeSliderMax;
     
-    this.volAXSelect.val(options.volA[0]);
-    this.volAYSelect.val(options.volA[1]);
-    this.volAZSelect.val(options.volA[2]);
-    this.volBXSelect.val(options.volB[0]);
-    this.volBYSelect.val(options.volB[1]);
-    this.volBZSelect.val(options.volB[2]);
+    this.volAXSelect.value = options.volA[0];
+    this.volAYSelect.value = options.volA[1];
+    this.volAZSelect.value = options.volA[2];
+    this.volBXSelect.value = options.volB[0];
+    this.volBYSelect.value = options.volB[1];
+    this.volBZSelect.value = options.volB[2];
   }
   
   // get and set buddhabrot parameters
@@ -881,17 +914,17 @@ class BuddhabrotControls {
   
   // start a scan
   _scan() {
-    this.canvas.css('cursor', 'wait');  // wait cursor
+    this.canvas.style.cursor = 'wait';  // wait cursor
     
     // fire scan start event
-    let eventData = this._getEventData(BuddhabrotControls.SCAN_START, true);
+    const eventData = this._getEventData(BuddhabrotControls.SCAN_START, true);
     this._dispatch(BuddhabrotControls.SCAN_START, eventData);
     
     this.buddhabrot.scan((success) => {
-      this.canvas.css('cursor', 'pointer');   // pointer cursor
-      
+      this.canvas.style.cursor = 'pointer';   // pointer cursor
+    
       // fire scan end event
-      let eventData = this._getEventData(BuddhabrotControls.SCAN_END, success);
+      const eventData = this._getEventData(BuddhabrotControls.SCAN_END, success);
       this._dispatch(BuddhabrotControls.SCAN_END, eventData);
     });
   }
@@ -911,7 +944,8 @@ class BuddhabrotControls {
   
   // initialize the buddhabrot then start a scan
   async start() {
-    this.canvas.css('cursor', 'wait');
+    this.canvas.style.cursor = 'wait';
+    
     await this.buddhabrot.initialize();
     this._scan();
     this._renderLoop();
@@ -940,17 +974,17 @@ class BuddhabrotControls {
     this.context.lineWidth = this.progressWidth;
     this.context.strokeStyle = this.progressColor;
     this.context.beginPath();
-    this.context.moveTo(1, this.canvas.height() - 1);
-    this.context.lineTo(this.buddhabrot.progress * this.canvas.width(), this.canvas.height() - 1);
+    this.context.moveTo(1, this.canvas.height - 1);
+    this.context.lineTo(this.buddhabrot.progress * this.canvas.width, this.canvas.height - 1);
     this.context.closePath();
     this.context.stroke();
   }
   
   _renderAxes() {
-    let y0 = this.canvas.width() / 2;
-    let x0 = this.canvas.height() / 2;
-    let len = -0.75 * Math.min(y0, x0);
-    let axes = [
+    const y0 = this.canvas.width / 2;
+    const x0 = this.canvas.height / 2;
+    const len = -0.75 * Math.min(y0, x0);
+    const axes = [
         [ 
           Math.round(len * this.Axx + x0), 
           Math.round(y0), 
@@ -974,8 +1008,8 @@ class BuddhabrotControls {
     
     this.context.lineWidth = this.axesWidth;
     for (let i = 0; i < 3; ++i) {
-      let x = axes[i][0];
-      let y = axes[i][1];
+      const x = axes[i][0];
+      const y = axes[i][1];
       this.context.strokeStyle = axes[i][3];
       this.context.beginPath();
       this.context.moveTo(y0, x0);
@@ -986,7 +1020,6 @@ class BuddhabrotControls {
   }
   
   
-  
   //-----------------------------------------------------------
   // 
   // observer pattern
@@ -995,7 +1028,7 @@ class BuddhabrotControls {
   
   // add an event handler
   on(event, handler) {
-    let handlers = this.handlers.get(event);
+    const handlers = this.handlers.get(event);
     if (handlers) {
       handlers.push(handler);
     }
@@ -1003,18 +1036,18 @@ class BuddhabrotControls {
   
   // remove an event handler
   off(event, handler) {
-    let handlers = this.handlers.get(event);
+    const handlers = this.handlers.get(event);
     if (handlers) {
-      let index = handlers.indexOf(handler);
+      const index = handlers.indexOf(handler);
       if (index != -1) handlers.splice(index, 1);
     }
   }
   
   // fire events
   _dispatch(event, data) {
-    let handlers = this.handlers.get(event);
+    const handlers = this.handlers.get(event);
     if (handlers) {
-      for (let handler of handlers) {
+      for (const handler of handlers) {
         handler(data);
       }
     }
@@ -1028,7 +1061,6 @@ class BuddhabrotControls {
     };
   }
 }
-
 
 
 

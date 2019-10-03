@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .buddhabrot {
   border-radius: 10px 10px 0px 0px;
   background-color: #fff;
@@ -9,16 +13,25 @@
 }
 
 .buddhabrot-controls {
+  width: 1000px;
   background-color: #fff;
   background-image: linear-gradient(#fff, #aaa);
   border-radius: 0px 0px 10px 10px;
   padding: 10px 40px 20px 40px;
+  margin: 0 auto;
 }
 
 .controls-table {
   width: 100%;
   color: #223c65;
   font-family: georgia, serif;
+  display: table;
+}
+.controls-table-row {
+  display: table-row;
+}
+.controls-table-cell {
+  display: table-cell;
 }
 
 .controls-label {
@@ -28,12 +41,6 @@
 
 .image-label {
   padding-top: 10px;
-}
-
-.controls-cell {
-  width: 50%;
-  position: relative;
-  vertical-align: top;
 }
 
 .buttons-box {
@@ -65,21 +72,21 @@
 .volAX {
   position: absolute;
   top: -10px;
-  left: 11px;
+  left: 15px;
   color: #9606b4;
   font-weight: bold;
 }
 .volAY {
   position: absolute;
   top: 42px;
-  left: -35px;
+  left: -33px;
   color: #ff8d12;
   font-weight: bold;
 }
 .volAZ {
   position: absolute;
   top: 50px;
-  left: 90px;
+  left: 92px;
   color: #b7a801;
   font-weight: bold;
 }
@@ -87,21 +94,21 @@
 .volBX {
   position: absolute;
   top: -10px;
-  left: 299px;
+  left: 303px;
   color: #9606b4;
   font-weight: bold;
 }
 .volBY {
   position: absolute;
   top: 42px;
-  left: 253px;
+  left: 255px;
   color: #ff8d12;
   font-weight: bold;
 }
 .volBZ {
   position: absolute;
   top: 50px;
-  left: 378px;
+  left: 380px;
   color: #b7a801;
   font-weight: bold;
 }
@@ -113,7 +120,7 @@
 
 .buddhabrot-button {
   background-color: #fff;
-  border: 1px solid #223c65;
+  border: 1px solid #4f7fca;
   font-family: georgia, serif;
   font-size: 17px;
   color: #223c65;
@@ -127,6 +134,12 @@
 }
 
 .buddhabrot-button:hover {
+  background-color: #cff6fa;
+  text-shadow: 3px 3px 1px #d4d4d4;
+}
+
+.buddhabrot-button:focus,
+.buddhabrot-button:active {
   background-color: #bee5f9;
   color: #000;
   text-shadow: 3px 3px 1px #d4d4d4;
@@ -139,7 +152,7 @@
 .color-slider {
   -webkit-appearance: none;
   width: 360px;
-  height: 4px;
+  height: 2px;
   border: 1px solid #888;
   border-radius: 20px;
   background: #fff;
@@ -221,7 +234,7 @@
 
 .density-box {
   display: inline-block;
-  margin: 10px 20px 0px 20px;
+  margin: 10px 15px 0px 15px;
   text-align: right;
 }
 
@@ -234,8 +247,3 @@
 .radio-box {
   padding-bottom: 3px;
 }
-
-
-
-
-

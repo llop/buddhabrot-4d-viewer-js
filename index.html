@@ -1,30 +1,31 @@
 <head>
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
   <script src='buddhabrot-4d-viewer.js'></script>
   <link rel='stylesheet' href='assets/buddhabrot-4d-viewer.css'>
   <script>
-  $(() => {
-    const canvas = $('#buddhabrot-canvas');
+  window.addEventListener('load', event => {
+    const canvas = document.getElementById('buddhabrot-canvas');
     const buddhabrot = new Buddhabrot(canvas);
     const buddhabrotControls = new BuddhabrotControls(buddhabrot, {
-      redInput: $('#red-input'),
-      greenInput: $('#green-input'),
-      blueInput: $('#blue-input'),
-      redSlider: $('#red-slider'),
-      greenSlider: $('#green-slider'),
-      blueSlider: $('#blue-slider'),
-      volumeSlider: $('#volume-slider'),
-      volAXSelect: $('#volAX-select'),
-      volAYSelect: $('#volAY-select'),
-      volAZSelect: $('#volAZ-select'),
-      volBXSelect: $('#volBX-select'),
-      volBYSelect: $('#volBY-select'),
-      volBZSelect: $('#volBZ-select'),
-      densitySelect: $('#density-select'),
-      resetButton: $('#reset-btn'),
-      repaintButton: $('#repaint-btn'),
-      cancelButton: $('#cancel-btn')
+      redInput: document.getElementById('red-input'),
+      greenInput: document.getElementById('green-input'),
+      blueInput: document.getElementById('blue-input'),
+      redSlider: document.getElementById('red-slider'),
+      greenSlider: document.getElementById('green-slider'),
+      blueSlider: document.getElementById('blue-slider'),
+      volumeSlider: document.getElementById('volume-slider'),
+      volAXSelect: document.getElementById('volAX-select'),
+      volAYSelect: document.getElementById('volAY-select'),
+      volAZSelect: document.getElementById('volAZ-select'),
+      volBXSelect: document.getElementById('volBX-select'),
+      volBYSelect: document.getElementById('volBY-select'),
+      volBZSelect: document.getElementById('volBZ-select'),
+      densitySelect: document.getElementById('density-select'),
+      resetButton: document.getElementById('reset-btn'),
+      repaintButton: document.getElementById('repaint-btn'),
+      cancelButton: document.getElementById('cancel-btn')
     });
+    buddhabrotControls.on('scan-start', event => { console.log('scan-start', event); });
+    buddhabrotControls.on('scan-end', event => { console.log('scan-end', event); });
     buddhabrotControls.start();
   });
   </script>
@@ -33,17 +34,15 @@
   <div style='margin:0 auto; width:1000px;'>
     
     <div class='buddhabrot'>
-      <canvas id='buddhabrot-canvas' class='buddhabrot-canvas' width='1000' height='600'>Your browser does not support canvas.</canvas>
-    </div>
-    
+    <canvas id='buddhabrot-canvas' class='buddhabrot-canvas' width='1000' height='600'>Your browser does not support canvas.</canvas>
     <div class='buddhabrot-controls'>
-      <table class='controls-table'>
-      <tr>
-      <td><div class='controls-label'>Colors</div></td>
-      <td><div class='controls-label'>Volume</div></td>
-      </tr>
-      <tr>
-        <td class='controls-cell'>
+      <div class='controls-table'>
+      <div class='controls-table-row'>
+        <div class='controls-table-cell'><div class='controls-label'>Colors</div></div>
+        <div class='controls-table-cell'><div class='controls-label'>Volume</div></div>
+      </div>
+      <div class='controls-table-row'>
+        <div class='controls-table-cell'>
           <div class='colors-box'>
             <input type='number' id='red-input' class='buddhabrot-input red-input' value='5000' min='1' max='5000'></input>
             <input type='range' id='red-slider' class='color-slider red-slider' value='5000' min='1' max='5000'></input>
@@ -70,8 +69,8 @@
             <button id='repaint-btn' class='buddhabrot-button control-btn'>Repaint</button>
             <button id='cancel-btn' class='buddhabrot-button control-btn'>Cancel</button>
           </div>
-        </td>
-        <td class='controls-cell'>
+        </div>
+        <div class='controls-table-cell'>
           <div class='volume-controls'>
           <div class='volume-slider-box'>
             <input type='range' id='volume-slider' class='color-slider volume-slider' value='0' min='0' max='1000'></input>
@@ -116,9 +115,10 @@
             </select>
           </div>
           </div>
-        </td>
-      </tr>
-      </table>
+        </div>
+      </div>
+      </div>
+    </div>
     </div>
     
   </div>

@@ -8,7 +8,7 @@ Check out the [live demo](http://www.albertlobo.com/fractals/buddhabrot-4d-viewe
 
 ## Features
 
-* Easy click + drag rotation.
+* Easy click & drag rotation.
 * RGB color channel selection.
 * Control the render using the 'Cancel', 'Repaint' ans 'Reset' buttons.
 * Adjust the granularity of the scan ('Density' select).
@@ -19,10 +19,9 @@ Check out the [live demo](http://www.albertlobo.com/fractals/buddhabrot-4d-viewe
 
 A working example can be found in [index.html](index.html).
 
-Include 'buddhabrot-4d-viewer.js' and 'buddhabrot-4d-viewer.css' in your HTML file. [jQuery](https://jquery.com/) is also required.
+Include 'buddhabrot-4d-viewer.js' and 'buddhabrot-4d-viewer.css' in your HTML file.
 
 ```html
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 <script src='buddhabrot-4d-viewer.js'></script>
 <link rel='stylesheet' href='assets/buddhabrot-4d-viewer.css'>
 ``` 
@@ -31,17 +30,15 @@ Add the viewer's HTML elements. The following code is taken directly from the ex
 
 ```html
 <div class='buddhabrot'>
-  <canvas id='buddhabrot-canvas' class='buddhabrot-canvas' width='1000' height='600'>Your browser does not support canvas.</canvas>
-</div>
-
+<canvas id='buddhabrot-canvas' class='buddhabrot-canvas' width='1000' height='600'>Your browser does not support canvas.</canvas>
 <div class='buddhabrot-controls'>
-  <table class='controls-table'>
-  <tr>
-  <td><div class='controls-label'>Colors</div></td>
-  <td><div class='controls-label'>Volume</div></td>
-  </tr>
-  <tr>
-    <td class='controls-cell'>
+  <div class='controls-table'>
+  <div class='controls-table-row'>
+    <div class='controls-table-cell'><div class='controls-label'>Colors</div></div>
+    <div class='controls-table-cell'><div class='controls-label'>Volume</div></div>
+  </div>
+  <div class='controls-table-row'>
+    <div class='controls-table-cell'>
       <div class='colors-box'>
         <input type='number' id='red-input' class='buddhabrot-input red-input' value='5000' min='1' max='5000'></input>
         <input type='range' id='red-slider' class='color-slider red-slider' value='5000' min='1' max='5000'></input>
@@ -68,14 +65,14 @@ Add the viewer's HTML elements. The following code is taken directly from the ex
         <button id='repaint-btn' class='buddhabrot-button control-btn'>Repaint</button>
         <button id='cancel-btn' class='buddhabrot-button control-btn'>Cancel</button>
       </div>
-    </td>
-    <td class='controls-cell'>
+    </div>
+    <div class='controls-table-cell'>
       <div class='volume-controls'>
       <div class='volume-slider-box'>
         <input type='range' id='volume-slider' class='color-slider volume-slider' value='0' min='0' max='1000'></input>
       </div>
       <div class='volumes-box'>
-        <img src='assets/buddhabrot-volumes.png' alt='Buddhabrot volumes' width='400' height='112'></img>
+        <img src='/img/fractals/buddhabrot-volumes.png' alt='Buddhabrot volumes' width='400' height='112'></img>
         <select id='volAX-select' class='volAX buddhabrot-select'>
           <option value='zr' selected>Zr</option>
           <option value='zi'>Zi</option>
@@ -114,9 +111,10 @@ Add the viewer's HTML elements. The following code is taken directly from the ex
         </select>
       </div>
       </div>
-    </td>
-  </tr>
-  </table>
+    </div>
+  </div>
+  </div>
+</div>
 </div>
 ```
 
@@ -127,27 +125,27 @@ Start the viewer with the following code:
 
 ```html
 <script>
-$(() => {
-  const canvas = $('#buddhabrot-canvas');
+window.addEventListener('load', event => {
+  const canvas = document.getElementById('buddhabrot-canvas');
   const buddhabrot = new Buddhabrot(canvas);
   const buddhabrotControls = new BuddhabrotControls(buddhabrot, {
-    redInput: $('#red-input'),
-    greenInput: $('#green-input'),
-    blueInput: $('#blue-input'),
-    redSlider: $('#red-slider'),
-    greenSlider: $('#green-slider'),
-    blueSlider: $('#blue-slider'),
-    volumeSlider: $('#volume-slider'),
-    volAXSelect: $('#volAX-select'),
-    volAYSelect: $('#volAY-select'),
-    volAZSelect: $('#volAZ-select'),
-    volBXSelect: $('#volBX-select'),
-    volBYSelect: $('#volBY-select'),
-    volBZSelect: $('#volBZ-select'),
-    densitySelect: $('#density-select'),
-    resetButton: $('#reset-btn'),
-    repaintButton: $('#repaint-btn'),
-    cancelButton: $('#cancel-btn')
+    redInput: document.getElementById('red-input'),
+    greenInput: document.getElementById('green-input'),
+    blueInput: document.getElementById('blue-input'),
+    redSlider: document.getElementById('red-slider'),
+    greenSlider: document.getElementById('green-slider'),
+    blueSlider: document.getElementById('blue-slider'),
+    volumeSlider: document.getElementById('volume-slider'),
+    volAXSelect: document.getElementById('volAX-select'),
+    volAYSelect: document.getElementById('volAY-select'),
+    volAZSelect: document.getElementById('volAZ-select'),
+    volBXSelect: document.getElementById('volBX-select'),
+    volBYSelect: document.getElementById('volBY-select'),
+    volBZSelect: document.getElementById('volBZ-select'),
+    densitySelect: document.getElementById('density-select'),
+    resetButton: document.getElementById('reset-btn'),
+    repaintButton: document.getElementById('repaint-btn'),
+    cancelButton: document.getElementById('cancel-btn')
   });
   buddhabrotControls.start();
 });
