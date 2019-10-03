@@ -61,10 +61,10 @@ class Buddhabrot {
     
     // set options
     // sample (this.squareIters)^2 points per pixel
-    let initialSide = 4.0;
+    const initialSide = 4.0;
     this.squareIters = squareIters;
     if (!this.squareIters) {
-      let minDim = Math.min(this.canvas.width, this.canvas.height);
+      const minDim = Math.min(this.canvas.width, this.canvas.height);
       this.squareIters = minDim / (initialSide * 10);
     }
     
@@ -178,11 +178,11 @@ class Buddhabrot {
   // https://stackoverflow.com/questions/34050929/3d-point-rotation-algorithm/34060479
   // https://de.wikipedia.org/wiki/Roll-Nick-Gier-Winkel
   _buildRotationMatrix() {
-    let cosb = Math.cos(this.longitude);
-    let sinb = Math.sin(this.longitude);
+    const cosb = Math.cos(this.longitude);
+    const sinb = Math.sin(this.longitude);
 
-    let cosc = Math.cos(this.latitude);
-    let sinc = Math.sin(this.latitude);
+    const cosc = Math.cos(this.latitude);
+    const sinc = Math.sin(this.latitude);
     
     this.Axx = cosb;
     this.Axy = sinb * sinc;
@@ -230,13 +230,13 @@ class Buddhabrot {
   }
   
   _getXYZ(zr, zi, cr, ci) {
-    let coords = [ zr, zi, cr, ci ];
-    let x1 = coords[this.volumeAX];
-    let y1 = coords[this.volumeAY];
-    let z1 = coords[this.volumeAZ];
-    let x2 = coords[this.volumeBX];
-    let y2 = coords[this.volumeBY];
-    let z2 = coords[this.volumeBZ];
+    const coords = [ zr, zi, cr, ci ];
+    const x1 = coords[this.volumeAX];
+    const y1 = coords[this.volumeAY];
+    const z1 = coords[this.volumeAZ];
+    const x2 = coords[this.volumeBX];
+    const y2 = coords[this.volumeBY];
+    const z2 = coords[this.volumeBZ];
     return [
         x1 + (x2 - x1) * this.angRotX,
         y1 + (y2 - y1) * this.angRotY,
@@ -260,15 +260,15 @@ class Buddhabrot {
     this.donePainting = false;
     this.repaint = true;
     
-    let halfWidth = this.width / 2;
-    let halfHeight = this.height / 2;
-    let halfImgWidth = this.imgWidth / 2;
-    let inc = this.width / this.imgWidth;
-    let halfInc = inc / 2;
+    const halfWidth = this.width / 2;
+    const halfHeight = this.height / 2;
+    const halfImgWidth = this.imgWidth / 2;
+    const inc = this.width / this.imgWidth;
+    const halfInc = inc / 2;
+    const ciIni = this.centerY - halfWidth + halfInc;
     let cr = this.centerX - halfHeight + halfInc;
-    let ciIni = this.centerY - halfWidth + halfInc;
     
-    let t = Date.now();
+    let t = performance.now();
     for (let x = 0; x < this.imgHeight; ++x, cr += inc) {
       let ci = ciIni;
       for (let y = 0; y < halfImgWidth; ++y, ci += inc) {
@@ -288,14 +288,13 @@ class Buddhabrot {
       }
       
       // wait every so often
-      if (Date.now() - t > this.waitMs) {
-        await this._sleep();
-        t = Date.now();
+      if (performance.now() - t > this.waitMs) {
+        t = await this._sleep();
       }
     }
     
     // thicken histogram
-    let imgMapTmp = new Uint8Array(this.imgSize);
+    const imgMapTmp = new Uint8Array(this.imgSize);
     for (let x = 0; x < this.imgHeight; ++x) for (let y = 0; y < this.imgWidth; ++y) 
       imgMapTmp[x * this.imgWidth + y] = this._isMapPointGood(x, y);
     
@@ -322,16 +321,16 @@ class Buddhabrot {
     this.progress = 0;
     this.scanLoop = true;
     
-    let halfWidth = this.width / 2;
-    let halfHeight = this.height / 2;
-    let halfImgWidth = this.imgWidth / 2;
-    let crIni = this.centerX - halfHeight;
-    let ciIni = this.centerY - halfWidth;
-    let inc = this.width / (this.imgWidth * this.squareIters);
-    let ratioTmp = this.imgWidth / this.width;
+    const halfWidth = this.width / 2;
+    const halfHeight = this.height / 2;
+    const halfImgWidth = this.imgWidth / 2;
+    const crIni = this.centerX - halfHeight;
+    const ciIni = this.centerY - halfWidth;
+    const inc = this.width / (this.imgWidth * this.squareIters);
+    const ratioTmp = this.imgWidth / this.width;
     
-    let iteratesR = new Float64Array(this.imgMapMaxN);
-    let iteratesI = new Float64Array(this.imgMapMaxN);
+    const iteratesR = new Float64Array(this.imgMapMaxN);
+    const iteratesI = new Float64Array(this.imgMapMaxN);
     for (let i = 0; i < this.imgMapMaxN; ++i) {
       iteratesR[i] = 0.0;
       iteratesI[i] = 0.0;
@@ -340,9 +339,8 @@ class Buddhabrot {
     this._resetDataStructures();
     this._buildRotationMatrix();
     
-    //let t0 = Date.now();
-    let maxN = Math.max(Math.max(this.maxNRed, this.maxNGreen), this.maxNBlue);
-    let t = Date.now();
+    const maxN = Math.max(Math.max(this.maxNRed, this.maxNGreen), this.maxNBlue);
+    let t = performance.now();
     for (let a = 0; this.scanLoop && a < this.imgHeight; ++a) {
       for (let b = 0; b < this.imgWidth; ++b) {
         if (this.imgMap[a * this.imgWidth + b]) {
@@ -367,13 +365,13 @@ class Buddhabrot {
               
               if (n >= this.minN && n < maxN) {
                 for (let k = 0; k < n; ++k) {
-                  let coords = this._getXYZ(iteratesR[k], iteratesI[k], cr, ci);
+                  const coords = this._getXYZ(iteratesR[k], iteratesI[k], cr, ci);
                   
-                  let x = Math.round(((this.Axx * coords[0] + this.Axy * coords[1] + this.Axz * coords[2]) - crIni) * ratioTmp);
-                  let y = Math.round(((this.Ayy * coords[1] + this.Ayz * coords[2]) - ciIni) * ratioTmp);
+                  const x = Math.round(((this.Axx * coords[0] + this.Axy * coords[1] + this.Axz * coords[2]) - crIni) * ratioTmp);
+                  const y = Math.round(((this.Ayy * coords[1] + this.Ayz * coords[2]) - ciIni) * ratioTmp);
                   
                   if (x >= 0 && x < this.imgHeight && y >= 0 && y < this.imgWidth) {
-                    let z = x * this.imgWidth + y;
+                    const z = x * this.imgWidth + y;
                     if (n < this.maxNRed) ++this.red[z];
                     if (n < this.maxNGreen) ++this.green[z];
                     if (n < this.maxNBlue) ++this.blue[z];
@@ -386,13 +384,11 @@ class Buddhabrot {
       }
       this.progress = (a + 1) / this.imgHeight;
       // wait every so often
-      if (Date.now() - t > this.waitMs) {
-        await this._sleep();
-        t = Date.now();
+      if (performance.now() - t > this.waitMs) {
+        t = await this._sleep();
       }     
     }
     
-    //console.log(Date.now() - t0);
     this.progress = -1;
     this.donePainting = true;
     return this.scanLoop;
@@ -411,7 +407,7 @@ class Buddhabrot {
   _renderHistogram() {
     let offset = 0;
     for (let i = 0; i < this.imgSize; ++i) {
-      let color = this.imgMap[i] ? 255 : 0;
+      const color = this.imgMap[i] ? 255 : 0;
       this.image.data[offset++] = color;
       this.image.data[offset++] = color;
       this.image.data[offset++] = color;
@@ -429,9 +425,9 @@ class Buddhabrot {
     }
     let offset = 0;
     for (let i = 0; i < this.imgSize; ++i) {
-      let redCh = Math.floor(255.0 * Math.min(this.colorCap, this.red[i]) / Math.min(this.colorCap, this.maxRed));
-      let greenCh = Math.floor(255.0 * Math.min(this.colorCap, this.green[i]) / Math.min(this.colorCap, this.maxGreen));
-      let blueCh = Math.floor(255.0 * Math.min(this.colorCap, this.blue[i]) / Math.min(this.colorCap, this.maxBlue));
+      const redCh = Math.floor(255.0 * Math.min(this.colorCap, this.red[i]) / Math.min(this.colorCap, this.maxRed));
+      const greenCh = Math.floor(255.0 * Math.min(this.colorCap, this.green[i]) / Math.min(this.colorCap, this.maxGreen));
+      const blueCh = Math.floor(255.0 * Math.min(this.colorCap, this.blue[i]) / Math.min(this.colorCap, this.maxBlue));
       this.gray[i] = Math.round(redCh * 0.299 + greenCh * 0.587 + blueCh * 0.114);
       ++this.imgHist[this.gray[i]];
       
@@ -479,15 +475,16 @@ class Buddhabrot {
 class BuddhabrotControls {
   
   
-  // events
-  static SCAN_START = 'scan-start';
-  static SCAN_END = 'scan-end';
-  
   static CREATE_ELEMENT(htmlString) {
     const div = document.createElement('div');
     div.innerHTML = htmlString.trim();
     return div.firstChild; 
   }
+  
+  // events
+  static SCAN_START = 'scan-start';
+  static SCAN_END = 'scan-end';
+  
   
   constructor(buddhabrot, {
         redInput = BuddhabrotControls.CREATE_ELEMENT("<input type='number'></input>"),
@@ -1057,11 +1054,8 @@ class BuddhabrotControls {
     return {
       type: type,
       data: this._getBuddhabrotParams(),
-      success: success
+      success: success,
+      timestamp: performance.now()
     };
   }
 }
-
-
-
-
