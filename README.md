@@ -277,4 +277,4 @@ buddhabrotControls.start();
 
 ## License
 
-`buddhabrot-4d-viewer-js` is resealsed under the MIT License. See [LICENSE](LICENSE) for details.
+`buddhabrot-4d-viewer-js` is released under the MIT License. See [LICENSE](LICENSE) for details.
