@@ -465,7 +465,7 @@ class Buddhabrot {
   
   // sleep function. use 'await this.sleep()' in async functions
   _sleep() { 
-    return new Promise(resolve => requestAnimationFrame(resolve)); 
+    return new Promise(requestAnimationFrame); 
   }
   
 }
@@ -911,7 +911,7 @@ class BuddhabrotControls {
   
   // start a scan
   _scan() {
-    this.canvas.style.cursor = 'wait';  // wait cursor
+    this.canvas.style.cursor = 'progress';  // progress cursor
     
     // fire scan start event
     const eventData = this._getEventData(BuddhabrotControls.SCAN_START, true);
@@ -941,7 +941,7 @@ class BuddhabrotControls {
   
   // initialize the buddhabrot then start a scan
   async start() {
-    this.canvas.style.cursor = 'wait';
+    this.canvas.style.cursor = 'progress';
     
     await this.buddhabrot.initialize();
     this._scan();
