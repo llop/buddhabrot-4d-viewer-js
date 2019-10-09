@@ -1,6 +1,6 @@
 {
   "name": "buddhabrot-4d-viewer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Buddhabrot 4D viewer for your browser",
   "main": "buddhabrot-4d-viewer.js",
   "scripts": {
