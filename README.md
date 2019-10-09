@@ -1,7 +1,8 @@
+
 buddhabrot-4d-viewer-js
 =======================
 
-Explore the 4 dimensions of the [Buddhabrot](https://en.wikipedia.org/wiki/Buddhabrot) using this HTML + Javascript viewer.
+Explore the 4 dimensions of the [Buddhabrot](https://en.wikipedia.org/wiki/Buddhabrot) using this HTML5 + Javascript viewer.
 
 Check out the [live demo](http://www.albertlobo.com/fractals/buddhabrot-4d-viewer)!
 
@@ -15,7 +16,14 @@ Check out the [live demo](http://www.albertlobo.com/fractals/buddhabrot-4d-viewe
 * Select the 4D rotation to render.
 * Histogram equalization for improved image quality.
 
-## Getting started
+## Quick start
+
+Options to add `buddhabrot-4d-viewer-js` to your project:
+* Install with [npm](https://npmjs.org): `npm install buddhabrot-4d-viewer-js`
+* [Download the latest release](https://github.com/llop/# buddhabrot-4d-viewer-js/archive/master.zip)
+* Clone the repo: `git clone https://github.com/llop/# buddhabrot-4d-viewer-js.git`
+
+## Basic use
 
 A working example can be found in [index.html](index.html).
 

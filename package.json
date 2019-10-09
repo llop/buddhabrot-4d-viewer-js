@@ -1,6 +1,6 @@
 {
   "name": "buddhabrot-4d-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Buddhabrot 4D viewer for your browser",
   "main": "buddhabrot-4d-viewer.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "web"
   ],
   "author": "Albert Lobo <albertlobo1981@yahoo.es> (http://albertlobo.com)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/llop/buddhabrot-4d-viewer-js/issues"
   },
