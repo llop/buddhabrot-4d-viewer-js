@@ -11,7 +11,7 @@ Check out the [live demo](http://www.albertlobo.com/fractals/buddhabrot-4d-viewe
 
 * Easy click & drag rotation.
 * RGB color channel selection.
-* Control the render using the 'Cancel', 'Repaint' ans 'Reset' buttons.
+* Control the render using the 'Cancel', 'Repaint' and 'Reset' buttons.
 * Adjust the granularity of the scan ('Density' select).
 * Select the 4D rotation to render.
 * Histogram equalization for improved image quality.
